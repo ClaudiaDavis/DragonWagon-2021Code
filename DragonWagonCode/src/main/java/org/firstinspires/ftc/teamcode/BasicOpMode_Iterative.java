@@ -133,6 +133,7 @@ public class BasicOpMode_Iterative extends OpMode {
      */
     @Override
     public void stop() {
+        //This should never do anything
     }
 
 }
