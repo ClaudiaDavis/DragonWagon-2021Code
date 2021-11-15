@@ -25,7 +25,6 @@ public class MecanumTest extends OpMode {
 
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
         frontLeft  = hardwareMap.get(DcMotor.class, "front_left");
         backLeft   = hardwareMap.get(DcMotor.class, "back_left");
         frontRight = hardwareMap.get(DcMotor.class, "front_right");
@@ -47,6 +46,7 @@ public class MecanumTest extends OpMode {
      */
     @Override
     public void init_loop() {
+        //
     }
 
     /*
@@ -62,40 +62,6 @@ public class MecanumTest extends OpMode {
      */
     @Override
     public void loop() {
-        // Setup a variable for each drive wheel to save power level for telemetry
-        double leftPower;
-        double rightPower;
-        double strafePower;
-
-        // POV Mode uses left stick to go forward, and right stick to turn.
-        // - This uses basic math to combine motions and is easier to drive straight.
-        /*double drive  = -gamepad1.left_stick_y;
-        double turn   =  gamepad1.right_stick_x;
-        double strafe =  gamepad1.left_stick_x;
-        
-        leftPower     =  Range.clip(drive + turn, -1.0, 1.0) ;
-        rightPower    =  Range.clip(drive - turn, -1.0, 1.0) ;
-        strafePower   =  Range.clip(strafe, -1.0, 1.0);
-
-        // Send calculated power to wheels
-        if ((strafePower > 0.1) || (strafePower < -0.1)) {
-            frontLeft.setPower(strafePower);
-            backLeft.setPower(-1 * strafePower);
-            frontRight.setPower(-1 * strafePower);
-            backRight.setPower(strafePower);
-        }
-        else {
-            frontLeft.setPower(leftPower);
-            backLeft.setPower(leftPower);
-            frontRight.setPower(rightPower);
-            backRight.setPower(rightPower);
-        }
-
-        // Show the elapsed game time and wheel power.
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-        telemetry.addData("Strafe", strafePower);*/
-        
         //Input variables
         double y  = -1 * gamepad1.left_stick_y;
         double x  = gamepad1.left_stick_x;
@@ -127,4 +93,4 @@ public class MecanumTest extends OpMode {
 
 }
 
-// End of some class that I really don't understand
+// End of MecanumTest class
