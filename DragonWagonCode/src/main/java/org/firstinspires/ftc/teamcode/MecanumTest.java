@@ -16,6 +16,15 @@ public class MecanumTest extends OpMode {
     private DcMotor frontRight;
     private DcMotor backRight;
 
+    //Object creation
+    Controls controls;
+
+    //Constructor
+    public MecanumTest() {
+        //Instance creation
+        controls = Controls.getInstance();
+    }
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -63,18 +72,18 @@ public class MecanumTest extends OpMode {
     @Override
     public void loop() {
         //Input variables
-        double y  = -1 * gamepad1.left_stick_y;
-        double x  = gamepad1.left_stick_x;
-        double rx = gamepad1.right_stick_x;
+        double drive  = controls.drivePower();
+        double strafe  = controls.strafePower();
+        double turn = controls.turnPower();
         
-        //Math stuff
-        double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        double frontLeftPower  = (y + x + rx) / denominator;
-        double backLeftPower   = (y - x + rx) / denominator;
-        double frontRightPower = (y - x - rx) / denominator;
-        double backRightPower  = (y + x - rx) / denominator;
+        //Math the correctly assign powers
+        double denominator = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
+        double frontLeftPower  = (drive + strafe + turn) / denominator;
+        double backLeftPower   = (drive - strafe + turn) / denominator;
+        double frontRightPower = (drive - strafe - turn) / denominator;
+        double backRightPower  = (drive + strafe - turn) / denominator;
         
-        //Motor go vroom
+        //Simple drive code
         frontLeft.setPower(frontLeftPower);
         backLeft.setPower(backLeftPower);
         frontRight.setPower(frontRightPower);
