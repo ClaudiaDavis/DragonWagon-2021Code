@@ -80,6 +80,7 @@ public class MecanumTest extends OpMode {
         frontRight.setPower(frontRightPower);
         backRight.setPower(backRightPower);
         
+        //Displays runtime
         telemetry.addData("Status", "Run Time: " + runtime.toString());
     }
 
