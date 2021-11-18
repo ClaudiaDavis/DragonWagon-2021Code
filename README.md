@@ -1,3 +1,3 @@
 # DragonWagon-2021Code
 
-This repository contains the 2021 code for the Glenelg Country School FTC team 607, Dragon Wagon.
+The code for the GCS FTC team, Dragon Wagon, to use during the Freight Frenzy game (2021).
