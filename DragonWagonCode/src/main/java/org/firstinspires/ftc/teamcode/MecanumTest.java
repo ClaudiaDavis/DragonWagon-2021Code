@@ -9,13 +9,12 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="Mecanum Test", group="Iterative Opmode")
 public class MecanumTest extends OpMode {
     /* Class variables */
-    //Nothing yet
+    OpMode opmode;
     
     //Instance Creation
     ElapsedTime runtime = new ElapsedTime();   // Start counting the time
-    OpMode opMode       = new OpMode();
     HardwareRobot robot = new HardwareRobot(); // Use's the robot's hardware
-    Controls controls   = new Controls(opMode);      // A class for consolidating the controling funcitons
+    Controls controls   = new Controls(opmode);      // A class for consolidating the controling funcitons
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -54,11 +53,13 @@ public class MecanumTest extends OpMode {
     @Override
     public void loop() {
         //Input variables
-        double drive  = -1 * gamepad1.left_stick_y;
-        double strafe = gamepad1.left_stick_x;
-        double turn   = gamepad1.right_stick_x;
+        //double drive  = -1 * gamepad1.left_stick_y;
+        //double strafe = gamepad1.left_stick_x;
+        //double turn   = gamepad1.right_stick_x;
 
-        //double drive = controls.drivePower();
+        double drive  = controls.drivePower();
+        double strafe = controls.strafePower();
+        double turn   = controls.turnPower();
         
         //Calculate the powers
         double denominator = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
