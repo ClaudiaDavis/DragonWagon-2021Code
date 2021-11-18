@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -17,12 +18,15 @@ public class MecanumTest extends OpMode {
     private DcMotor backRight;
 
     //Object creation
-    Controls controls;
+    Gamepad gamepad1;
 
     //Constructor
     public MecanumTest() {
         //Instance creation
-        controls = Controls.getInstance();
+        gamepad1 = new Gamepad();
+
+        //Assigns gamepad ID
+        gamepad1.setGamepadID(1);
     }
 
     /*
@@ -72,9 +76,9 @@ public class MecanumTest extends OpMode {
     @Override
     public void loop() {
         //Input variables
-        double drive  = controls.drivePower();
-        double strafe = controls.strafePower();
-        double turn   = controls.turnPower();
+        double drive  = -1 * gamepad1.gamepad1.left_stick_y;
+        double strafe = controls.gamepad1.left_stick_X;
+        double turn   = controls.gamepad1.right_stick_X;
         
         //Math the correctly assign powers
         double denominator = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
