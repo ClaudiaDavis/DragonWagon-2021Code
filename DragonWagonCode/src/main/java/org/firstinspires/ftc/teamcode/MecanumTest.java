@@ -73,8 +73,8 @@ public class MecanumTest extends OpMode {
     public void loop() {
         //Input variables
         double drive  = controls.drivePower();
-        double strafe  = controls.strafePower();
-        double turn = controls.turnPower();
+        double strafe = controls.strafePower();
+        double turn   = controls.turnPower();
         
         //Math the correctly assign powers
         double denominator = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
