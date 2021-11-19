@@ -14,7 +14,7 @@ public class MecanumTest extends OpMode {
     //Instance Creation
     ElapsedTime runtime = new ElapsedTime();   // Start counting the time
     HardwareRobot robot = new HardwareRobot(); // Use's the robot's hardware
-    Controls controls   = new Controls(opmode);      // A class for consolidating the controling funcitons
+    Controls controls   = new Controls(this);  // A class for consolidating the controling funcitons
 
     /*
      * Code to run ONCE when the driver hits INIT
