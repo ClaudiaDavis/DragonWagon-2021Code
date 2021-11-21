@@ -53,7 +53,7 @@ public class Controls {
     }
 
     public boolean grabberControl() {
-        boolean deployRetract = logitech.gamepad2.right;
+        boolean deployRetract = true;// = logitech.gamepad2.right;
 
         return deployRetract;
     }
