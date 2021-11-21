@@ -16,7 +16,11 @@ public class Controls {
         //Passes an OpMode into the class (allows for the use of controllers)
         logitech = opmode;
     }
-    
+
+    /**
+     * Gamepad 1
+     * Controls the driving of the robot 
+     */
     public double drivePower() {
         double power = -1 * logitech.gamepad1.left_stick_y;
         double drivePower = power * speedMultiplier;
@@ -37,5 +41,22 @@ public class Controls {
 
         return turnPower;
     }
+
+    /**
+     * Gamepad 2
+     * Controls the movement and usage of the manipulator
+     */
+    public double tiltPower() {
+        double power = -1 * logitech.gamepad2.left_stick_y;
+
+        return power;
+    }
+
+    public boolean grabberControl() {
+        boolean deployRetract = logitech.gamepad2.right;
+
+        return deployRetract;
+    }
 }
+
 //End of the Controls class

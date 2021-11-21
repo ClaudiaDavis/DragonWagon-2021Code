@@ -6,14 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Mecanum Test", group="Iterative Opmode")
-public class MecanumTest extends OpMode {
+@TeleOp(name="Driver Controlled", group="Iterative Opmode")
+public class DriverControlled extends OpMode {
     /* Class variables */
-    OpMode opmode;
-    
+    //
+
     //Instance Creation
     ElapsedTime runtime = new ElapsedTime();   // Start counting the time
-    HardwareRobot robot = new HardwareRobot(); // Use's the robot's hardware
+    Drive drive         = new Drive();         // A class for drive functions
     Controls controls   = new Controls(this);  // A class for consolidating the controling funcitons
 
     /*
@@ -25,6 +25,9 @@ public class MecanumTest extends OpMode {
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
+
+        //Sets the motor mode
+        robot.teleopConfig();
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -57,22 +60,11 @@ public class MecanumTest extends OpMode {
         //double strafe = gamepad1.left_stick_x;
         //double turn   = gamepad1.right_stick_x;
 
-        double drive  = controls.drivePower();
-        double strafe = controls.strafePower();
-        double turn   = controls.turnPower();
-        
-        //Calculate the powers
-        double denominator = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
-        double frontLeftPower  = (drive + strafe + turn) / denominator;
-        double backLeftPower   = (drive - strafe + turn) / denominator;
-        double frontRightPower = (drive - strafe - turn) / denominator;
-        double backRightPower  = (drive + strafe - turn) / denominator;
-        
-        //Simple drive code
-        robot.frontLeft.setPower(frontLeftPower);
-        robot.backLeft.setPower(backLeftPower);
-        robot.frontRight.setPower(frontRightPower);
-        robot.backRight.setPower(backRightPower);
+        // Wheel control
+        wheelControl();
+
+        // Manipulator Control
+        manipulatorControl();
         
         //Displays runtime
         telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -86,5 +78,27 @@ public class MecanumTest extends OpMode {
         //This should never do anything
     }
 
+    private void wheelControl() {
+        // Gamepad 1 inputs
+        double drive  = controls.drivePower();
+        double strafe = controls.strafePower();
+        double turn   = controls.turnPower();
+
+        //Mecanum Drive Method
+        drive.mecanumDrive(drive, strafe, turn);
+    }
+
+    private void manipulatorControl() {
+        //Gamepad 2 functions
+        double  tilt    = controls.tiltPower();
+        boolean grabber = controls.grabberControl();
+
+        //Tilt control
+        intake.tiltArm(0.00);
+
+        //Grabber control
+    }
+
 }
+
 // End of the MecanumTest class
