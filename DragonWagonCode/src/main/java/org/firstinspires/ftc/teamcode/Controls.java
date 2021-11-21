@@ -3,6 +3,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 public class Controls {
+    /* Enumerator for setting grabber states (words are easier to read than numbers) */
+    public static enum GrabberState {
+        DEPLOYED,
+        RETRACTED;
+    }
+    GrabberState grabberState = GrabberState.DEPLOYED;
+
     /* Class Variables */
     double speedMultiplier = 1.00;
     
@@ -44,7 +51,7 @@ public class Controls {
 
     /**
      * Gamepad 2
-     * Controls the movement and usage of the manipulator
+     * Controls the tilt of the manipulator
      */
     public double tiltPower() {
         double power = -1 * logitech.gamepad2.left_stick_y;
@@ -52,10 +59,26 @@ public class Controls {
         return power;
     }
 
-    public boolean grabberControl() {
-        boolean deployRetract = true;// = logitech.gamepad2.right;
+    /**
+     * Gamepad 2
+     * Sets the position of the grabber servo
+     */
+    public GrabberState getGrabberPosition() {
+        boolean deployRetract = logitech.gamepad2.right_bumper;
 
-        return deployRetract;
+        //Checks if the right bumper is pressed
+        if (deployRetract == true) {
+            //If the grabber is currently deployed, changes it to be retracted
+            if (grabberState == GrabberState.DEPLOYED) {
+                grabberState = GrabberState.RETRACTED;
+            }
+            //If the grabber is currently retracted, changes it to be depolyed
+            else if (grabberState == GrabberState.RETRACTED) {
+                grabberState = GrabberState.DEPLOYED;
+            }
+        }
+
+        return grabberState;
     }
 }
 

@@ -140,7 +140,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Manipulator Motor
-        //tilt.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        tilt.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
 

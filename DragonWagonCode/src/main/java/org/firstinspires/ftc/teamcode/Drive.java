@@ -77,7 +77,7 @@ public class Drive {
     }
 
     /**
-     * Converts feet to encorder ticks
+     * Converts feet to encoder ticks
      */
     private double feetToTicks(double targetFeet) {
         final double TICKS_PER_FOOT = 0.00;         //This value is currently unknown

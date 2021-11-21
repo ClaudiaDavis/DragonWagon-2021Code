@@ -12,9 +12,10 @@ public class DriverControlled extends OpMode {
     //
 
     //Instance Creation
-    ElapsedTime runtime = new ElapsedTime();   // Start counting the time
-    Drive drive         = new Drive();         // A class for drive functions
-    Controls controls   = new Controls(this);  // A class for consolidating the controling funcitons
+    ElapsedTime runtime     = new ElapsedTime();   // Start counting the time
+    Drive       drive       = new Drive();         // A class for drive functions
+    Manipulator manipulator = new manipulator();        // A class for all manipulator funcitons
+    Controls    controls    = new Controls(this);  // A class for the controling funcitons
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -90,13 +91,14 @@ public class DriverControlled extends OpMode {
 
     private void manipulatorControl() {
         //Gamepad 2 functions
-        double  tilt    = controls.tiltPower();
-        boolean grabber = controls.grabberControl();
+        double       tiltPower      = controls.tiltPower();
+        GrabberState grabberControl = controls.getGrabberPosition();
 
         //Tilt control
-        intake.tiltArm(0.00);
+        manipulator.tiltArm(tilt);
 
         //Grabber control
+        manipulator.setGrabberPosition();
     }
 
 }
