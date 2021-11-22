@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Drive {
     /* Class Variables */
-    double speedMultiplier = 1.00;
+    //Nothing yet...
 
     //Object Creation
     HardwareRobot robot;

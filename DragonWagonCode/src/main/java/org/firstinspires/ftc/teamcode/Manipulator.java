@@ -29,6 +29,7 @@ public class Manipulator {
      * Changes the physical position of the grabber
      */
     public void setGrabberPosition(Controls.GrabberState position) {
+        //Constants (positions)
         final double DEPOLYED  = 1.00;
         final double RETRACTED = 0.00;
 

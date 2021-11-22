@@ -55,8 +55,9 @@ public class Controls {
      */
     public double tiltPower() {
         double power = -1 * logitech.gamepad2.left_stick_y;
+        double tiltPower = power * speedMultiplier; 
 
-        return power;
+        return tiltPower;
     }
 
     /**
