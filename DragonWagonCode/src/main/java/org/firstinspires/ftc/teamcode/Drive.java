@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Drive {
     /* Class Variables */
@@ -18,7 +19,7 @@ public class Drive {
     }
     
     /**
-     * Manipulator movement code
+     * Mecanum Drive movement code
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
         //Calculate the powers
@@ -54,15 +55,16 @@ public class Drive {
 
         //Feet to ticks
         double target = feetToTicks(feet);
+        int targetInteger = (int)target;
 
         //Sets the desired target position
-        robot.frontLeft.setTargetPosition(target);
-        robot.backLeft.setTargetPosition(target);
-        robot.frontRight.setTargetPosition(target);
-        robot.backRight.setTargetPosition(target);
+        robot.frontLeft.setTargetPosition(targetInteger);
+        robot.backLeft.setTargetPosition(targetInteger);
+        robot.frontRight.setTargetPosition(targetInteger);
+        robot.backRight.setTargetPosition(targetInteger);
 
         //Allow movement
-        robot.startAutoMovement()
+        robot.startAutoMovement();
 
         //Sets the motor power
         robot.frontLeft.setPower(autoPower);

@@ -12,10 +12,11 @@ public class DriverControlled extends OpMode {
     //
 
     //Instance Creation
-    ElapsedTime runtime     = new ElapsedTime();   // Start counting the time
-    Drive       drive       = new Drive();         // A class for drive functions
-    Manipulator manipulator = new manipulator();        // A class for all manipulator funcitons
-    Controls    controls    = new Controls(this);  // A class for the controling funcitons
+    HardwareRobot robot       = HardwareRobot.getInstance();
+    ElapsedTime   runtime     = new ElapsedTime();   // Start counting the time
+    Drive         drive       = new Drive();         // A class for drive functions
+    Manipulator   manipulator = new Manipulator();   // A class for all manipulator funcitons
+    Controls      controls    = new Controls(this);  // A class for the controling funcitons
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -81,24 +82,24 @@ public class DriverControlled extends OpMode {
 
     private void wheelControl() {
         // Gamepad 1 inputs
-        double drive  = controls.drivePower();
-        double strafe = controls.strafePower();
-        double turn   = controls.turnPower();
+        double leftStickY  = controls.drivePower();
+        double leftStickX  = controls.strafePower();
+        double rightStickX = controls.turnPower();
 
         //Mecanum Drive Method
-        drive.mecanumDrive(drive, strafe, turn);
+        drive.mecanumDrive(leftStickY, leftStickX, rightStickX);
     }
 
     private void manipulatorControl() {
         //Gamepad 2 functions
-        double       tiltPower      = controls.tiltPower();
-        GrabberState grabberControl = controls.getGrabberPosition();
+        double                tiltPower      = controls.tiltPower();
+        Controls.GrabberState grabberControl = controls.getGrabberPosition();
 
         //Tilt control
-        manipulator.tiltArm(tilt);
+        manipulator.tiltArm(tiltPower);
 
         //Grabber control
-        manipulator.setGrabberPosition();
+        manipulator.setGrabberPosition(grabberControl);
     }
 
 }

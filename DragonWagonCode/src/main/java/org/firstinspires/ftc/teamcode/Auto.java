@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Auto extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwareRobot robot   = new HardwareRobot();   // Uses the robot's hardware
+    HardwareRobot robot   = HardwareRobot.getInstance();   // Uses the robot's hardware
     ElapsedTime   runtime = new ElapsedTime();
     Drive         drive   = new Drive(); 
 
@@ -79,8 +79,7 @@ public class Auto extends LinearOpMode {
         encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-        robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-        robot.rightClaw.setPosition(0.0);
+        robot.grabber.setPosition(1.0);            // S4: Stop and close the claw.
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
@@ -130,7 +129,7 @@ public class Auto extends LinearOpMode {
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (robot.leftDrive.isBusy() && robot.rightDrive.isBusy())) {
+                   (robot.frontLeft.isBusy() && robot.frontRight.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
@@ -138,7 +137,7 @@ public class Auto extends LinearOpMode {
                                 robot.frontLeft.getCurrentPosition(),
                                 robot.backLeft.getCurrentPosition(),
                                 robot.frontRight.getCurrentPosition(),
-                                robot.backRight.getCurrentPosition()));
+                                robot.backRight.getCurrentPosition());
                 telemetry.update();
             }
 

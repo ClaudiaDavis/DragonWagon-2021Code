@@ -15,7 +15,7 @@ public class Manipulator {
      */
     public Manipulator() {
         //Instance Creation
-        robot = new HardwareRobot.getInstance();
+        robot = HardwareRobot.getInstance();
     }
 
     /**
@@ -28,16 +28,16 @@ public class Manipulator {
     /**
      * Changes the physical position of the grabber
      */
-    public void setGrabberPosition(GrabberState position) {
+    public void setGrabberPosition(Controls.GrabberState position) {
         final double DEPOLYED  = 1.00;
         final double RETRACTED = 0.00;
 
         //What to do if the position is deployed
-        if (position == GrabberState.DEPLOYED) {
+        if (position == Controls.GrabberState.DEPLOYED) {
             robot.grabber.setPosition(DEPOLYED);
         }
         //What to do if the position is retracted
-        else if (position == GrabberState.RETRACTED) {
+        else if (position == Controls.GrabberState.RETRACTED) {
             robot.grabber.setPosition(RETRACTED);
         }
     }
