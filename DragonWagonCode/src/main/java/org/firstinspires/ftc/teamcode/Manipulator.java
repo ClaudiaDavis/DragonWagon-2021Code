@@ -30,9 +30,9 @@ public class Manipulator {
      */
     public void setGrabberPosition(Controls.GrabberState position) {
         //Constants (positions)
-        final double DEPOLYED  = 1.00;
-        final double RETRACTED = 0.00;
-
+        final double DEPOLYED  =  1.00;
+        final double RETRACTED = -1.00;
+        
         //What to do if the position is deployed
         if (position == Controls.GrabberState.DEPLOYED) {
             robot.grabber.setPosition(DEPOLYED);

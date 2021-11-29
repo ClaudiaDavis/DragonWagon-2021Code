@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Drive {
     /* Class Variables */
@@ -23,11 +22,6 @@ public class Drive {
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
         //Calculate the powers
-        /*double denominator     = Math.max(Math.abs(drive) + Math.abs(strafe) + Math.abs(turn), 1);
-        double frontLeftPower  = (drive + strafe + turn) / denominator;
-        double backLeftPower   = (drive - strafe + turn) / denominator;
-        double frontRightPower = (drive - strafe - turn) / denominator;
-        double backRightPower  = (drive + strafe - turn) / denominator;*/
         double frontLeftPower  = (drive + strafe + turn);
         double backLeftPower   = (drive - strafe + turn);
         double frontRightPower = (drive - strafe - turn);

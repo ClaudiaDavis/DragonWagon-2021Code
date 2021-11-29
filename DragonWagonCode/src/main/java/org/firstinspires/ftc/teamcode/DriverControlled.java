@@ -11,7 +11,7 @@ public class DriverControlled extends OpMode {
     /* Class variables */
     //
 
-    //Instance Creation
+    /* Instance Creation */
     HardwareRobot robot       = HardwareRobot.getInstance();
     ElapsedTime   runtime     = new ElapsedTime();   // Start counting the time
     Drive         drive       = new Drive();         // A class for drive functions
@@ -57,11 +57,6 @@ public class DriverControlled extends OpMode {
      */
     @Override
     public void loop() {
-        //Input variables
-        //double drive  = -1 * gamepad1.left_stick_y;
-        //double strafe = gamepad1.left_stick_x;
-        //double turn   = gamepad1.right_stick_x;
-
         // Wheel control
         wheelControl();
 
