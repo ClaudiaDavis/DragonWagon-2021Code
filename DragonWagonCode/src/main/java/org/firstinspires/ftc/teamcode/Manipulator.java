@@ -25,6 +25,10 @@ public class Manipulator {
         robot.tilt.setPower(tiltPower);
     }
 
+    public void intake(double intakePower) {
+        robot.intake.setPower(intakePower);
+    }
+
     /**
      * Changes the physical position of the grabber
      */

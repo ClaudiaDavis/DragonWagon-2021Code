@@ -11,7 +11,7 @@ public class Controls {
     GrabberState grabberState = GrabberState.DEPLOYED;
 
     /* Class Variables */
-    double speedMultiplier = 1.00;
+    double speedMultiplier = 0.50;
     
     //Object Creation
     OpMode logitech;
@@ -30,21 +30,21 @@ public class Controls {
      */
     public double drivePower() {
         double power = -1 * logitech.gamepad1.left_stick_y;
-        double drivePower = power * speedMultiplier;
+        double drivePower = power;
 
         return drivePower;
     }
 
     public double strafePower() {
         double power = logitech.gamepad1.left_stick_x;
-        double strafePower = power * speedMultiplier;
+        double strafePower = power;
 
         return strafePower;
     }
 
     public double turnPower() {
         double power = logitech.gamepad1.right_stick_x;
-        double turnPower = power * speedMultiplier;
+        double turnPower = power;
 
         return turnPower;
     }
@@ -58,6 +58,17 @@ public class Controls {
         double tiltPower = power * speedMultiplier; 
 
         return tiltPower;
+    }
+
+    /**
+     * Gamepad 2
+     * Controls the intake mechanism
+     */
+    public double intakePower() {
+        double power = -1 * logitech.gamepad2.right_stick_y;
+        double intakePower = power;
+
+        return intakePower;
     }
 
     /**

@@ -22,6 +22,7 @@ public class HardwareRobot {
     public DcMotor backLeft;
     public DcMotor frontRight;
     public DcMotor backRight;
+    public DcMotor intake;
     public DcMotor tilt;
 
     //Servos
@@ -45,14 +46,17 @@ public class HardwareRobot {
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        // Initialize the DcMotors motors
+        // Initialize the Drive motors
         frontLeft  = hwMap.get(DcMotor.class, "front_left");
         backLeft   = hwMap.get(DcMotor.class, "back_left");
         frontRight = hwMap.get(DcMotor.class, "front_right");
         backRight  = hwMap.get(DcMotor.class, "back_right");
+
+        // Initialize the Manipulator motors
+        intake     = hwMap.get(DcMotor.class, "intake");
         tilt       = hwMap.get(DcMotor.class, "tilt");
 
-        // Initialize the servos
+        // Initialize the Manipulator servos
         grabber    = hwMap.get(Servo.class, "grabber");
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -62,11 +66,14 @@ public class HardwareRobot {
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
+        intake.setDirection(DcMotor.Direction.REVERSE);
+
         // Set all motors to zero power
         frontLeft.setPower(0.00);
         backLeft.setPower(0.00);
         frontRight.setPower(0.00);
         backRight.setPower(0.00);
+        intake.setPower(0.00);
         tilt.setPower(0.00);
 
         //Set the servo stating position
