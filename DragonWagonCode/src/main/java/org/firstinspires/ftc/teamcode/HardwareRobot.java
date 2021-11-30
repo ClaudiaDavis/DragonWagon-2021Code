@@ -56,16 +56,17 @@ public class HardwareRobot {
         intake     = hwMap.get(DcMotor.class, "intake");
         tilt       = hwMap.get(DcMotor.class, "tilt");
 
-        // Initialize the Manipulator servos
+        // Initialize the Manipulator servo
         grabber    = hwMap.get(Servo.class, "grabber");
 
-        // Most robots need the motor on one side to be reversed to drive forward
-        // Reverse the motor that runs backwards when connected directly to the battery
+        //Sets the direction for the Drive motors
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backRight.setDirection(DcMotor.Direction.FORWARD);
 
+        //Sets the direction for the Manipulator motors
+        tilt.setDirection(DcMotor.Direction.FORWARD);
         intake.setDirection(DcMotor.Direction.REVERSE);
 
         // Set all motors to zero power
@@ -92,6 +93,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         //Manipulator Motor
+        //intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //tilt.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /* Makes the motors run using encoders */
@@ -102,6 +104,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Manipulator Motors
+        //intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //tilt.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
@@ -117,6 +120,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //Manipulator Motors
+        //intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //tilt.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
@@ -132,6 +136,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Manipulator Motors
+        //intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //tilt.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
@@ -147,6 +152,7 @@ public class HardwareRobot {
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Manipulator Motor
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         tilt.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

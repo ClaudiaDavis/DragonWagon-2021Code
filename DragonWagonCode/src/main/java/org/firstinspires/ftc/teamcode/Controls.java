@@ -11,8 +11,9 @@ public class Controls {
     GrabberState grabberState = GrabberState.DEPLOYED;
 
     /* Class Variables */
-    double speedMultiplier = 0.50;
-    
+    double driveSpeedMultiplier = 1.00;
+    double tiltSpeedMultiplier  = 0.50;
+
     //Object Creation
     OpMode logitech;
 
@@ -30,21 +31,21 @@ public class Controls {
      */
     public double drivePower() {
         double power = -1 * logitech.gamepad1.left_stick_y;
-        double drivePower = power;
+        double drivePower = power * driveSpeedMultiplier;
 
         return drivePower;
     }
 
     public double strafePower() {
         double power = logitech.gamepad1.left_stick_x;
-        double strafePower = power;
+        double strafePower = power * driveSpeedMultiplier;
 
         return strafePower;
     }
 
     public double turnPower() {
         double power = logitech.gamepad1.right_stick_x;
-        double turnPower = power;
+        double turnPower = power * driveSpeedMultiplier;
 
         return turnPower;
     }
@@ -55,7 +56,7 @@ public class Controls {
      */
     public double tiltPower() {
         double power = -1 * logitech.gamepad2.left_stick_y;
-        double tiltPower = power * speedMultiplier; 
+        double tiltPower = power * tiltSpeedMultiplier; 
 
         return tiltPower;
     }
@@ -76,18 +77,19 @@ public class Controls {
      * Sets the position of the grabber servo
      */
     public GrabberState getGrabberPosition() {
-        boolean deployRetract = logitech.gamepad2.right_bumper;
+        //Gets controller inputs
+        boolean rightBumper = logitech.gamepad2.right_bumper;
+        boolean leftBumper  = logitech.gamepad2.left_bumper;
 
         //Checks if the right bumper is pressed
-        if (deployRetract == true) {
-            //If the grabber is currently deployed, changes it to be retracted
-            if (grabberState == GrabberState.DEPLOYED) {
-                grabberState = GrabberState.RETRACTED;
-            }
-            //If the grabber is currently retracted, changes it to be depolyed
-            else if (grabberState == GrabberState.RETRACTED) {
-                grabberState = GrabberState.DEPLOYED;
-            }
+        if (rightBumper == true) {
+            //Sets the grabber state to deployed
+            grabberState = GrabberState.DEPLOYED;
+        }
+        //Checks if the left bumper is pressed
+        else if (leftBumper == true) {
+            //Sets the grabber state to retracted
+            grabberState = GrabberState.RETRACTED;
         }
 
         return grabberState;

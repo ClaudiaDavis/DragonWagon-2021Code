@@ -13,10 +13,10 @@ public class DriverControlled extends OpMode {
 
     /* Instance Creation */
     HardwareRobot robot       = HardwareRobot.getInstance();
-    ElapsedTime   runtime     = new ElapsedTime();   // Start counting the time
+    ElapsedTime   runtime     = new ElapsedTime();   // Starts counting the time
+    Manipulator   manipulator = new Manipulator();   // A class for all manipulator functions
+    Controls      controls    = new Controls(this);  // A class for the controling functions
     Drive         drive       = new Drive();         // A class for drive functions
-    Manipulator   manipulator = new Manipulator();   // A class for all manipulator funcitons
-    Controls      controls    = new Controls(this);  // A class for the controling funcitons
 
     /*
      * Code to run ONCE when the driver hits INIT

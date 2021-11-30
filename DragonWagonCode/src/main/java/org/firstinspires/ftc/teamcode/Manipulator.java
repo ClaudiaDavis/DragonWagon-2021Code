@@ -1,12 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 public class Manipulator {
-    /* Class Variables */
-    double speedMultiplier = 1.00;
-
-    //First Time
-    boolean firstTime = true;
-
     //Object Creation
     HardwareRobot robot;
 
@@ -25,6 +19,9 @@ public class Manipulator {
         robot.tilt.setPower(tiltPower);
     }
 
+    /**
+     * Gives power to the intake motor
+     */
     public void intake(double intakePower) {
         robot.intake.setPower(intakePower);
     }
@@ -33,15 +30,15 @@ public class Manipulator {
      * Changes the physical position of the grabber
      */
     public void setGrabberPosition(Controls.GrabberState position) {
-        //Constants (positions)
+        //Positions (constants)
         final double DEPOLYED  =  1.00;
         final double RETRACTED = -1.00;
         
-        //What to do if the position is deployed
+        //What to do if the position is set to deployed
         if (position == Controls.GrabberState.DEPLOYED) {
             robot.grabber.setPosition(DEPOLYED);
         }
-        //What to do if the position is retracted
+        //What to do if the position is set to retracted
         else if (position == Controls.GrabberState.RETRACTED) {
             robot.grabber.setPosition(RETRACTED);
         }
