@@ -78,7 +78,7 @@ public class HardwareRobot {
         tilt.setPower(0.00);
 
         //Set the servo stating position
-        grabber.setPosition(0.00);
+        grabber.setPosition(-1.00);
     }
 
     /**

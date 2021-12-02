@@ -31,8 +31,8 @@ public class Manipulator {
      */
     public void setGrabberPosition(Controls.GrabberState position) {
         //Positions (constants)
-        final double DEPOLYED  =  1.00;
-        final double RETRACTED = -1.00;
+        final double DEPOLYED  = -1.00;
+        final double RETRACTED =  1.00;
         
         //What to do if the position is set to deployed
         if (position == Controls.GrabberState.DEPLOYED) {
