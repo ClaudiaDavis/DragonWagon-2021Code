@@ -33,12 +33,7 @@ public class DriverControlled extends OpMode {
 
         //Sets the motor mode
         robot.teleopConfig();
-
-        //Prints the LED Display
-        telemetry.addData("LED Display Mode: ", led.outputMode());
-        telemetry.addData("LED Pattern: ",      led.outputPattern());
-        telemetry.update();
-
+        
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         telemetry.update();

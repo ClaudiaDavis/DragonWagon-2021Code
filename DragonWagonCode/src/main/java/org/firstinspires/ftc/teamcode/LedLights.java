@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver.BlinkinPattern;
 
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
@@ -21,9 +22,10 @@ public class LedLights {
     /**
      * Enumerator for mode
      */
-    public static enum DisplayMode {
-        MANUAL,
-        AUTO
+    protected enum DisplayMode {
+        INIT,
+        AUTO,
+        MANUAL;
     }
 
     /* Object Creation */
@@ -35,7 +37,7 @@ public class LedLights {
     private final static int LED_PERIOD = 10;       //Change the pattern every 10 seconds in auto
     private final static int GAMEPAD_LOCKOUT = 500; //Rate limit gamepad button presses to every 500ms
 
-    LedLights.DisplayMode displayMode;
+    DisplayMode displayMode;
     Deadline ledCycleDeadline;
     Deadline gamepadRateLimit;
 
@@ -43,23 +45,30 @@ public class LedLights {
      * Constructor
      */
     private LedLights() {
+        //Instance Creation
+        robot = HardwareRobot.getInstance();
+
         //Sets the value of displayMode
-        displayMode = LedLights.DisplayMode.AUTO;
+        displayMode = DisplayMode.INIT;
 
         //Sets the initial pattern
         pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
-        robot.lights.setPattern(pattern);
 
         //Idk what a deadline does
         ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
         gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
+    }
+    
+    public void ledInit() {
+        if (displayMode == DisplayMode.INIT) {
+            robot.lights.setPattern(pattern);
+        }
 
-        //Instance Creation
-        robot = HardwareRobot.getInstance();
+        displayMode = DisplayMode.AUTO;
     }
 
     public void ledAuto() {
-        if (displayMode == LedLights.DisplayMode.AUTO) {
+        if (displayMode == DisplayMode.AUTO) {
             doAutoDisplay();
         }
         else {
@@ -81,31 +90,30 @@ public class LedLights {
         }
 
         if (buttonAOne == true) {
-            setdisplayMode(LedLights.DisplayMode.AUTO);
+            setdisplayMode(DisplayMode.AUTO);
             gamepadRateLimit.reset();
         }
         else if (buttonBOne == true) {
-            setdisplayMode(LedLights.DisplayMode.MANUAL);
+            setdisplayMode(DisplayMode.MANUAL);
             gamepadRateLimit.reset();
         }
-        else if ((displayMode == LedLights.DisplayMode.MANUAL) && (leftBumperOne == true)) {
+        else if ((displayMode == DisplayMode.MANUAL) && (leftBumperOne == true)) {
             pattern = pattern.previous();
             displayPattern();
             gamepadRateLimit.reset();
         }
-        else if ((displayMode == LedLights.DisplayMode.MANUAL) && (rightBumperOne == true)) {
+        else if ((displayMode == DisplayMode.MANUAL) && (rightBumperOne == true)) {
             pattern = pattern.next();
             displayPattern();
             gamepadRateLimit.reset();
         }
     }
 
-    protected void setdisplayMode(LedLights.DisplayMode displayMode) {
+    private void setdisplayMode(DisplayMode displayMode) {
         this.displayMode = displayMode;
-        //display.setValue(displayMode.toString());
     }
 
-    protected void doAutoDisplay() {
+    private void doAutoDisplay() {
         if (ledCycleDeadline.hasExpired()) {
             pattern = pattern.next();
             displayPattern();
@@ -113,18 +121,10 @@ public class LedLights {
         }
     }
 
-    protected void displayPattern() {
+    private void displayPattern() {
         robot.lights.setPattern(pattern);
-        //patternName.setValue(pattern.toString());
     }
 
-    public String outputMode() {
-        return displayMode.toString();
-    }
-
-    public String outputPattern() {
-        return pattern.toString();
-    }
 }
 
 //End of the Drive class
