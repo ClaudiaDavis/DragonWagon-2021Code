@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -12,24 +13,31 @@ public class DriverControlled extends OpMode {
     //
 
     /* Instance Creation */
-    HardwareRobot robot       = HardwareRobot.getInstance();
-    ElapsedTime   runtime     = new ElapsedTime();   // Starts counting the time
-    Manipulator   manipulator = new Manipulator();   // A class for all manipulator functions
-    Controls      controls    = new Controls(this);  // A class for the controling functions
-    Drive         drive       = new Drive();         // A class for drive functions
+    HardwareRobot robot       = HardwareRobot.getInstance(); //
+    LedLights     led         = LedLights.getInstance();     //
+    ElapsedTime   runtime     = new ElapsedTime();           // Starts counting the time
+    Manipulator   manipulator = new Manipulator();           // A class for all manipulator functions
+    Controls      controls    = new Controls(this);          // A class for the controling functions
+    Drive         drive       = new Drive();                 // A class for drive functions
 
     /*
      * Code to run ONCE when the driver hits INIT
      */
     @Override
     public void init() {
-        /* Initialize the hardware variables.
+        /**
+         * Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
 
         //Sets the motor mode
         robot.teleopConfig();
+
+        //Prints the LED Display
+        telemetry.addData("LED Display Mode: ", led.outputMode());
+        telemetry.addData("LED Pattern: ",      led.outputPattern());
+        telemetry.update();
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -62,6 +70,9 @@ public class DriverControlled extends OpMode {
 
         // Manipulator Control
         manipulatorControl();
+
+        // LED Control
+        ledControl();
         
         //Displays runtime
         telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -99,6 +110,15 @@ public class DriverControlled extends OpMode {
 
         //Grabber control
         manipulator.setGrabberPosition(grabberControl);
+    }
+
+    private void ledControl() {
+        boolean automatic = controls.automaticLED();
+        boolean manual    = controls.manualLED();
+        boolean previous  = controls.previousLED();
+        boolean next      = controls.nextLED();
+
+        led.ledTeleOp(automatic, manual, previous, next);
     }
 
 }

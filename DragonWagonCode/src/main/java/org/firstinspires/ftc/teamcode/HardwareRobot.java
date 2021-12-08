@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -16,7 +18,7 @@ public class HardwareRobot {
         return instance;
     }
 
-    /* Class Variables */
+    /* Object Creation */
     //DcMotors motors
     public DcMotor frontLeft;
     public DcMotor backLeft;
@@ -28,11 +30,23 @@ public class HardwareRobot {
     //Servos
     public Servo grabber;
 
+    //LED Controller
+    RevBlinkinLedDriver lights;
+    
+    //Other members
+    HardwareMap hwMap;
+
+    /* Class Variables */
+    //Nothing yet...
+
+    // ERROR CODES
+    public static final int FAIL = -1;
+    public static final int PASS =  1;
+    public static final int DONE =  2;
+    public static final int CONT =  3;
+
     //firstTime variables
     boolean firstTime = true;
-
-    //Other members
-    HardwareMap hwMap = null;
 
     /**
      * Constructor
@@ -58,6 +72,9 @@ public class HardwareRobot {
 
         // Initialize the Manipulator servo
         grabber    = hwMap.get(Servo.class, "grabber");
+
+        // Initialize the LED Light Driver
+        lights     = hwMap.get(RevBlinkinLedDriver.class, "lights");
 
         //Sets the direction for the Drive motors
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -86,15 +103,7 @@ public class HardwareRobot {
      */
     public void autoConfig() {
         /* Resets the motor encoders */
-        //Drive Motors
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        //Manipulator Motor
-        //intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //tilt.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        resetEncoders();
 
         /* Makes the motors run using encoders */
         //Drive Motors
@@ -138,6 +147,21 @@ public class HardwareRobot {
         //Manipulator Motors
         //intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //tilt.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    /**
+     * Makes the robot reset its encoders
+     */
+    public void resetEncoders() {
+        //Drive Motors
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //Manipulator Motor
+        //intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //tilt.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     /**

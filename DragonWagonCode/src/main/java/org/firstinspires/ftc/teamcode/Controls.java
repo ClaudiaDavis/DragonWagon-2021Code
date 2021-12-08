@@ -51,6 +51,25 @@ public class Controls {
     }
 
     /**
+     * Controls the Robot's LED's
+     */
+    public boolean automaticLED() {
+        return logitech.gamepad1.a;
+    }
+
+    public boolean manualLED() {
+        return logitech.gamepad1.b;
+    }
+
+    public boolean previousLED() {
+        return logitech.gamepad1.left_bumper;
+    }
+
+    public boolean nextLED() {
+        return logitech.gamepad1.right_bumper;
+    }
+
+    /**
      * Gamepad 2
      * Controls the tilt of the manipulator
      */
