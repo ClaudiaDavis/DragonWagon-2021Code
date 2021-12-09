@@ -19,19 +19,31 @@ public class Drive {
     
     /**
      * Mecanum Drive movement code
+     *
+     * double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+     * double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+     * double rightX = gamepad1.right_stick_x;
+     * final double v1 = r * Math.cos(robotAngle) + rightX;
+     * final double v2 = r * Math.sin(robotAngle) - rightX;
+     * final double v3 = r * Math.sin(robotAngle) + rightX;
+     * final double v4 = r * Math.cos(robotAngle) - rightX;
+     *
+     * leftFront.setPower(v1);
+     * rightFront.setPower(v2);
+     * leftRear.setPower(v3)
+     * rightRear.setPower(v4);
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
-        //Calculate the powers
-        double frontLeftPower  = (drive + strafe + turn);
-        double backLeftPower   = (drive - strafe + turn);
-        double frontRightPower = (drive - strafe - turn);
-        double backRightPower  = (drive + strafe - turn);
 
-        //Clamps the powers
-        frontLeftPower  = Range.clip(frontLeftPower, -1.0, 1.0);
-        backLeftPower   = Range.clip(backLeftPower, -1.0, 1.0);
-        frontRightPower = Range.clip(frontRightPower, -1.0, 1.0);
-        backRightPower  = Range.clip(backRightPower, -1.0, 1.0);
+        // Trigonometry Wizardry
+        
+        double r = Math.hypot(strafe, drive);
+        double robotAngle = Math.atan2(drive, strafe) - Math.PI / 4;
+        double rightX = turn;
+        final double frontLeftPower = r * Math.cos(robotAngle) + rightX;
+        final double backLeftPower = r * Math.sin(robotAngle) - rightX;
+        final double frontRightPower = r * Math.sin(robotAngle) + rightX;
+        final double backRightPower = r * Math.cos(robotAngle) - rightX;
 
         //Sets motor power
         robot.frontLeft.setPower(frontLeftPower);
