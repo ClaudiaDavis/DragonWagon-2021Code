@@ -33,6 +33,9 @@ public class DriverControlled extends OpMode {
 
         //Sets the motor mode
         robot.teleopConfig();
+
+        //Pretty colors
+        led.ledInit();
         
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");

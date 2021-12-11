@@ -44,7 +44,7 @@ public class Controls {
     }
 
     public double turnPower() {
-        double power = logitech.gamepad1.right_stick_x;
+        double power = -1 * logitech.gamepad1.right_stick_x;
         double turnPower = power * driveSpeedMultiplier;
 
         return turnPower;
@@ -85,7 +85,13 @@ public class Controls {
      * Controls the intake mechanism
      */
     public double intakePower() {
-        double power = -1 * logitech.gamepad2.right_stick_y;
+        
+        double power = 0;
+        
+        if(logitech.gamepad2.y) {
+            power = -0.5;
+        }
+        
         double intakePower = power;
 
         return intakePower;

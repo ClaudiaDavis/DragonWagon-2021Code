@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.hardware.rev.RevBlinkinLedDriver.BlinkinPattern;
 
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
@@ -52,7 +51,7 @@ public class LedLights {
         displayMode = DisplayMode.INIT;
 
         //Sets the initial pattern
-        pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
+        pattern = RevBlinkinLedDriver.BlinkinPattern.AQUA;//RAINBOW_RAINBOW_PALETTE;
 
         //Idk what a deadline does
         ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
