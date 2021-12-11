@@ -34,7 +34,6 @@ public class Drive {
      * rightRear.setPower(v4);
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
-<<<<<<< HEAD
         //Calculate the powers
 //        double frontLeftPower  = (drive + strafe + turn);
 //        double backLeftPower   = (drive - strafe + turn);
@@ -47,11 +46,8 @@ public class Drive {
 //        frontRightPower = Range.clip(frontRightPower, -1.0, 1.0);
 //        backRightPower  = Range.clip(backRightPower, -1.0, 1.0);
 
-=======
 
         // Trigonometry Wizardry
-        
->>>>>>> fd8ba3ce7fb46b5ed22d09c733e4109441cfd183
         double r = Math.hypot(strafe, drive);
         double robotAngle = Math.atan2(drive, strafe) - Math.PI / 4;
         double rightX = turn;
