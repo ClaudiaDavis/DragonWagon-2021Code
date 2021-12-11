@@ -26,6 +26,7 @@ public class HardwareRobot {
     public DcMotor backRight;
     public DcMotor intake;
     public DcMotor tilt;
+    public DcMotor spin;
 
     //Servos
     public Servo grabber;
@@ -70,6 +71,9 @@ public class HardwareRobot {
         intake     = hwMap.get(DcMotor.class, "intake");
         tilt       = hwMap.get(DcMotor.class, "tilt");
 
+        // Initialize the Spinner motor
+        spin       = hwMap.get(DcMotor.class, "spin");
+
         // Initialize the Manipulator servo
         grabber    = hwMap.get(Servo.class, "grabber");
 
@@ -86,6 +90,18 @@ public class HardwareRobot {
         tilt.setDirection(DcMotor.Direction.FORWARD);
         intake.setDirection(DcMotor.Direction.REVERSE);
 
+        //Sets the direction for the spiny motor
+        spin.setDirection(DcMotor.Direction.FORWARD);
+
+        //Sets the mode of all the motors to be without encoder
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        tilt.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         // Set all motors to zero power
         frontLeft.setPower(0.00);
         backLeft.setPower(0.00);
@@ -93,6 +109,7 @@ public class HardwareRobot {
         backRight.setPower(0.00);
         intake.setPower(0.00);
         tilt.setPower(0.00);
+        spin.setPower(0.00);
 
         //Set the servo stating position
         grabber.setPosition(-1.00);
@@ -111,10 +128,6 @@ public class HardwareRobot {
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        //Manipulator Motors
-        //intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //tilt.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /**
@@ -127,10 +140,6 @@ public class HardwareRobot {
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        //Manipulator Motors
-        //intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //tilt.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     /**
@@ -143,10 +152,6 @@ public class HardwareRobot {
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        //Manipulator Motors
-        //intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //tilt.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /**
@@ -158,10 +163,6 @@ public class HardwareRobot {
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        //Manipulator Motor
-        //intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //tilt.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     /**
@@ -178,6 +179,9 @@ public class HardwareRobot {
         //Manipulator Motor
         intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         tilt.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //Spiny motor
+        spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
 

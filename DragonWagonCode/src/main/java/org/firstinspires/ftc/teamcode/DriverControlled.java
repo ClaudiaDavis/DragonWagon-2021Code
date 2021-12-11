@@ -18,6 +18,7 @@ public class DriverControlled extends OpMode {
     ElapsedTime   runtime     = new ElapsedTime();           // Starts counting the time
     Manipulator   manipulator = new Manipulator();           // A class for all manipulator functions
     Controls      controls    = new Controls(this);          // A class for the controling functions
+    Spinner       spin        = new Spinner();               // A class for the spinner related functions
     Drive         drive       = new Drive();                 // A class for drive functions
 
     /*
@@ -69,6 +70,9 @@ public class DriverControlled extends OpMode {
         // Manipulator Control
         manipulatorControl();
 
+        // Spinner Control
+        spinnerControl();
+
         // LED Control
         ledControl();
         
@@ -84,6 +88,9 @@ public class DriverControlled extends OpMode {
         //This should never do anything
     }
 
+    /**
+     * A method to control the mecanum wheels
+     */
     private void wheelControl() {
         // Gamepad 1 inputs
         double leftStickY  = controls.drivePower();
@@ -94,6 +101,9 @@ public class DriverControlled extends OpMode {
         drive.mecanumDrive(leftStickY, leftStickX, rightStickX);
     }
 
+    /**
+     * A method to control the manipulator and related functions
+     */
     private void manipulatorControl() {
         //Gamepad 2 functions
         double                tiltPower      = controls.tiltPower();
@@ -110,6 +120,20 @@ public class DriverControlled extends OpMode {
         manipulator.setGrabberPosition(grabberControl);
     }
 
+    /**
+     * A method to control the spinner wheel
+     */
+    private void spinnerControl() {
+        //Gamepad 2 Functions
+        double spinPower = controls.spinnerPower();
+
+        //Passes the power that allows the spinner to spin
+        spin.spinControl(spinPower);
+    }
+
+    /**
+     * A method to control the LEDs and related functions
+     */
     private void ledControl() {
         boolean automatic = controls.automaticLED();
         boolean manual    = controls.manualLED();

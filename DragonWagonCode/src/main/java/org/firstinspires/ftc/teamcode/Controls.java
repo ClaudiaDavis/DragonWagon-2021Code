@@ -85,7 +85,6 @@ public class Controls {
      * Controls the intake mechanism
      */
     public double intakePower() {
-        
         double power = 0;
         
         if(logitech.gamepad2.y) {
@@ -96,6 +95,28 @@ public class Controls {
 
         return intakePower;
     }
+
+    /**
+     * Gamepad 2
+     * Controls the spiny motor
+     * @return spinyPower
+     */
+    public double spinnerPower() {
+        //Controller inputs
+        float rightTrigger = logitech.gamepad2.right_trigger;
+        float leftTrigger  = logitech.gamepad2.left_trigger ;
+
+        //Decides what value to return and incorperates a dead band
+        if ( (leftTrigger > 0.1) && (rightTrigger < 0.1) ) {
+            return (double)leftTrigger;
+        }
+        else if ( (leftTrigger < 0.1) && (rightTrigger > 0.1) ) {
+            return (double)rightTrigger * -1;
+        }
+        else {
+            return 0.00;
+        }
+    } 
 
     /**
      * Gamepad 2

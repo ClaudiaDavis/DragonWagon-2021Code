@@ -35,16 +35,16 @@ public class Drive {
      */
     public void mecanumDrive(double drive, double strafe, double turn) {
         //Calculate the powers
-//        double frontLeftPower  = (drive + strafe + turn);
-//        double backLeftPower   = (drive - strafe + turn);
-//        double frontRightPower = (drive - strafe - turn);
-//        double backRightPower  = (drive + strafe - turn);
-//
-//        //Clamps the powers
-//        frontLeftPower  = Range.clip(frontLeftPower, -1.0, 1.0);
-//        backLeftPower   = Range.clip(backLeftPower, -1.0, 1.0);
-//        frontRightPower = Range.clip(frontRightPower, -1.0, 1.0);
-//        backRightPower  = Range.clip(backRightPower, -1.0, 1.0);
+        //double frontLeftPower  = (drive + strafe + turn);
+        //double backLeftPower   = (drive - strafe + turn);
+        //double frontRightPower = (drive - strafe - turn);
+        //double backRightPower  = (drive + strafe - turn);
+        
+        //Clamps the powers
+        //frontLeftPower  = Range.clip(frontLeftPower, -1.0, 1.0);
+        //backLeftPower   = Range.clip(backLeftPower, -1.0, 1.0);
+        //frontRightPower = Range.clip(frontRightPower, -1.0, 1.0);
+        //backRightPower  = Range.clip(backRightPower, -1.0, 1.0);
 
 
         // Trigonometry Wizardry
